@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2043
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D954B0E5-53A0-4325-8043-E2C2884C6667}"
 EndProject
@@ -18,13 +18,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrystalQuartz.WebFramework", "CrystalQuartz.WebFramework\CrystalQuartz.WebFramework.csproj", "{F222B378-08E8-4D5D-8663-4C7DF6DCCB35}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrystalQuartz.WebFramework.Tests", "CrystalQuartz.WebFramework.Tests\CrystalQuartz.WebFramework.Tests.csproj", "{07AFB56A-C38B-47CD-AF1E-CD6B4CCEB840}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{79E1569A-3B34-42C1-835D-9A15B4CE6E7F}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrystalQuartz.Owin", "CrystalQuartz.Owin\CrystalQuartz.Owin.csproj", "{B52FE682-48F8-45D0-8D57-E74309B3326E}"
 EndProject
@@ -106,5 +99,8 @@ Global
 		{B52FE682-48F8-45D0-8D57-E74309B3326E} = {609AECA9-C389-40C0-A91F-3930932245C4}
 		{6A5FBA3A-E08D-4388-B592-FEA447BF0D5F} = {C71EB29F-604D-4AD9-8F33-DCFE203689A6}
 		{9491BA61-BE01-432D-8C77-D7322DE4CD3C} = {C71EB29F-604D-4AD9-8F33-DCFE203689A6}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {23B72936-4F39-4022-82BB-21434915BA20}
 	EndGlobalSection
 EndGlobal
