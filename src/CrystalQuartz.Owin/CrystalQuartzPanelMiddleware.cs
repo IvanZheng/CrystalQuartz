@@ -36,6 +36,7 @@ namespace CrystalQuartz.Owin
             }
             IRequest owinRequest = new QuartzRequest(context.Request.Query, formCollection);
             IResponseRenderer responseRenderer = new QuartzResponseRenderer(context);
+
             _runningApplication.Handle(owinRequest, responseRenderer);
             //if (!handleResult.IsHandled)
             //{
