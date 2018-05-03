@@ -2,6 +2,52 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Content\Fonts\flaticon.css" />
+    <None Remove="Content\Fonts\flaticon.eot" />
+    <None Remove="Content\Fonts\flaticon.html" />
+    <None Remove="Content\Fonts\flaticon.otf" />
+    <None Remove="Content\Fonts\flaticon.svg" />
+    <None Remove="Content\Fonts\flaticon.ttf" />
+    <None Remove="Content\Fonts\flaticon.woff" />
+    <None Remove="Content\Fonts\flaticon.woff2" />
+    <None Remove="Content\Images\classType.png" />
+    <None Remove="Content\Images\loading.gif" />
+    <None Remove="Content\index.html" />
+    <None Remove="Content\Scripts\application.js" />
+    <None Remove="Content\Scripts\bootstrap.js" />
+    <None Remove="Content\Scripts\john-smith-3.2.0-min.js" />
+    <None Remove="Content\Scripts\john-smith-3.2.0.js" />
+    <None Remove="Content\Scripts\jquery-1.11.1.min.js" />
+    <None Remove="Content\Scripts\lodash.compat.min.js" />
+    <None Remove="Content\Styles\bootstrap.css" />
+    <None Remove="Content\Styles\main.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Fonts\flaticon.css" />
+    <EmbeddedResource Include="Content\Fonts\flaticon.eot" />
+    <EmbeddedResource Include="Content\Fonts\flaticon.html" />
+    <EmbeddedResource Include="Content\Fonts\flaticon.otf" />
+    <EmbeddedResource Include="Content\Fonts\flaticon.svg" />
+    <EmbeddedResource Include="Content\Fonts\flaticon.ttf" />
+    <EmbeddedResource Include="Content\Fonts\flaticon.woff" />
+    <EmbeddedResource Include="Content\Fonts\flaticon.woff2" />
+    <EmbeddedResource Include="Content\Images\classType.png" />
+    <EmbeddedResource Include="Content\Images\loading.gif" />
+    <EmbeddedResource Include="Content\index.html">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>index.tt</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\Scripts\application.js" />
+    <EmbeddedResource Include="Content\Scripts\bootstrap.js" />
+    <EmbeddedResource Include="Content\Scripts\john-smith-3.2.0-min.js" />
+    <EmbeddedResource Include="Content\Scripts\john-smith-3.2.0.js" />
+    <EmbeddedResource Include="Content\Scripts\jquery-1.11.1.min.js" />
+    <EmbeddedResource Include="Content\Scripts\lodash.compat.min.js" />
+    <EmbeddedResource Include="Content\Styles\bootstrap.css" />
+    <EmbeddedResource Include="Content\Styles\main.css" />
+  </ItemGroup>
 
 
 
@@ -20,5 +66,20 @@
   <ItemGroup>
     <ProjectReference Include="..\CrystalQuartz.Core\CrystalQuartz.Core.csproj" />
     <ProjectReference Include="..\CrystalQuartz.WebFramework\CrystalQuartz.WebFramework.csproj" />
+  </ItemGroup>
+
+
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+
+
+  <ItemGroup>
+    <None Update="Content\index.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>index.html</LastGenOutput>
+    </None>
   </ItemGroup>
 </Project>
