@@ -1,8 +1,9 @@
-﻿namespace CrystalQuartz.Application
+﻿using Newtonsoft.Json;
+
+namespace CrystalQuartz.Application
 {
     using System.Collections.Generic;
     using System.Reflection;
-    using System.Web.Script.Serialization;
     using CrystalQuartz.Application.Comands;
     using CrystalQuartz.Core;
     using CrystalQuartz.Core.SchedulerProviders;
@@ -34,11 +35,8 @@
             {
                 _schedulerProvider.Init();
 
-                Context.JavaScriptSerializer.RegisterConverters(new List<JavaScriptConverter>
-                {
-                    new DateTimeConverter(),
-                    new ActivityStatusConverter()
-                });
+                Context.JavaScriptSerializer.Converters.Add(new DateTimeConverter());
+                Context.JavaScriptSerializer.Converters.Add(new ActivityStatusConverter());
 
                 return this
 

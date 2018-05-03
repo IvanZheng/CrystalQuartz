@@ -1,22 +1,23 @@
-﻿namespace CrystalQuartz.WebFramework.Config
+﻿using Newtonsoft.Json;
+
+namespace CrystalQuartz.WebFramework.Config
 {
     using System.Reflection;
-    using System.Web.Script.Serialization;
 
     public class AppContext
     {
-        private readonly JavaScriptSerializer _javaScriptSerializer;
+        private readonly JsonSerializer _javaScriptSerializer;
         private readonly Assembly _resourcesAssembly;
         private readonly string _defautResourcePrefix;
 
-        public AppContext(JavaScriptSerializer javaScriptSerializer, Assembly resourcesAssembly, string defautResourcePrefix)
+        public AppContext(JsonSerializer javaScriptSerializer, Assembly resourcesAssembly, string defautResourcePrefix)
         {
             _javaScriptSerializer = javaScriptSerializer;
             _resourcesAssembly = resourcesAssembly;
             _defautResourcePrefix = defautResourcePrefix;
         }
 
-        public JavaScriptSerializer JavaScriptSerializer
+        public JsonSerializer JavaScriptSerializer
         {
             get { return _javaScriptSerializer; }
         }

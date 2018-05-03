@@ -1,39 +1,46 @@
-﻿namespace CrystalQuartz.Owin
+﻿using System.Threading.Tasks;
+using CrystalQuartz.Application;
+using CrystalQuartz.Core;
+using CrystalQuartz.Core.SchedulerProviders;
+using CrystalQuartz.WebFramework;
+using CrystalQuartz.WebFramework.AspNetCore;
+using CrystalQuartz.WebFramework.HttpAbstractions;
+using Microsoft.AspNetCore.Http;
+
+namespace CrystalQuartz.Owin
 {
-    using System.Threading.Tasks;
-    using CrystalQuartz.Application;
-    using CrystalQuartz.Core;
-    using CrystalQuartz.Core.SchedulerProviders;
-    using CrystalQuartz.WebFramework;
-    using CrystalQuartz.WebFramework.HttpAbstractions;
-    using CrystalQuartz.WebFramework.Owin;
-    using Microsoft.Owin;
-
-    using OwinRequest = WebFramework.Owin.OwinRequest;
-
-    public class CrystalQuartzPanelMiddleware : OwinMiddleware
+    public class CrystalQuartzPanelMiddleware
     {
+        private readonly RequestDelegate _next;
         private readonly RunningApplication _runningApplication;
 
-        public CrystalQuartzPanelMiddleware(
-            OwinMiddleware next, 
-            ISchedulerProvider schedulerProvider,
-            CrystalQuartzOptions options): base(next)
+        public CrystalQuartzPanelMiddleware(RequestDelegate next,
+                                            ISchedulerProvider schedulerProvider,
+                                            CrystalQuartzOptions options)
         {
-            Application application = new CrystalQuartzPanelApplication(
-                schedulerProvider,
-                new DefaultSchedulerDataProvider(schedulerProvider), 
-                options);
+            WebFramework.Application application = new CrystalQuartzPanelApplication(
+                                                                                     schedulerProvider,
+                                                                                     new DefaultSchedulerDataProvider(schedulerProvider),
+                                                                                     options);
 
             _runningApplication = application.Run();
+            _next = next;
         }
 
-        public override async Task Invoke(IOwinContext context)
+        public async Task Invoke(HttpContext context)
         {
-            IRequest owinRequest = new OwinRequest(context.Request.Query, await context.Request.ReadFormAsync());
-            IResponseRenderer responseRenderer = new OwinResponseRenderer(context);
-
+            IFormCollection formCollection = null;
+            if (context.Request.HasFormContentType)
+            {
+                formCollection = await context.Request.ReadFormAsync();
+            }
+            IRequest owinRequest = new QuartzRequest(context.Request.Query, formCollection);
+            IResponseRenderer responseRenderer = new QuartzResponseRenderer(context);
             _runningApplication.Handle(owinRequest, responseRenderer);
+            //if (!handleResult.IsHandled)
+            //{
+            //    await _next.Invoke(context);
+            //}
         }
     }
 }

@@ -12,18 +12,20 @@
             _handlers = handlers;
         }
 
-        public void Handle(IRequest request, IResponseRenderer renderer)
+        public RequestHandlingResult Handle(IRequest request, IResponseRenderer renderer)
         {
+            RequestHandlingResult finalRequestHandlingResult = RequestHandlingResult.NotHandled;
+            
             foreach (IRequestHandler handler in _handlers)
             {
                 RequestHandlingResult result = handler.HandleRequest(request);
                 if (result.IsHandled)
                 {
                     renderer.Render(result.Response);
-
-                    return;
+                    return result;
                 }
             }
+            return finalRequestHandlingResult;
         }
     }
 }

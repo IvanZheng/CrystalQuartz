@@ -1,32 +1,38 @@
-﻿namespace CrystalQuartz.Application
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Web.Script.Serialization;
-    using CrystalQuartz.Core.Utils;
+﻿using System;
+using CrystalQuartz.Core.Utils;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
-    internal class DateTimeConverter : JavaScriptConverter
+namespace CrystalQuartz.Application
+{
+    internal class DateTimeConverter : JsonConverter
     {
-        public override object Deserialize(IDictionary<string, object> dictionary, Type type, JavaScriptSerializer serializer)
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            throw new InvalidOperationException();
+            throw new NotImplementedException();
         }
 
-        public override IDictionary<string, object> Serialize(object obj, JavaScriptSerializer serializer)
+        public override bool CanConvert(Type objectType)
         {
-            if (obj == null)
+            return objectType == typeof(DateTime) || objectType == typeof(DateTime?);
+        }
+
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            if (value == null)
             {
-                return null;
+                return;
             }
 
-            var date = GetDate(obj);
+            var date = GetDate(value);
 
-            var result = new Dictionary<string, object>();
-            result["Ticks"] = date.UnixTicks();
-            result["UtcDateStr"] = date.ToString("G");
-            result["ServerDateStr"] = date.ToLocalTime().ToString("G");
-
-            return result;
+            var o = JObject.FromObject(new
+            {
+                Ticks = date.UnixTicks(),
+                UtcDateStr = date.ToString("G"),
+                ServerDateStr = date.ToLocalTime().ToString("G")
+            });
+            o.WriteTo(writer);
         }
 
         private DateTime GetDate(object obj)
@@ -37,18 +43,6 @@
             }
 
             throw new Exception("Unexpected date value " + obj);
-        }
-
-        public override IEnumerable<Type> SupportedTypes
-        {
-            get
-            {
-                return new List<Type>
-                       {
-                           typeof(DateTime),
-                           typeof(DateTime?),
-                       };
-            }
         }
     }
 }

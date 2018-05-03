@@ -18,7 +18,7 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="..\CrystalQuartz.Core\CrystalQuartz.Core.csproj" />
-    <ProjectReference Include="..\CrystalQuartz.WebFramework\CrystalQuartz.WebFramework.csproj" />
+    <ProjectReference Include="..\CrystalQuartz.Application\CrystalQuartz.Application.csproj" />
+    <ProjectReference Include="..\CrystalQuartz.WebFramework.Owin\CrystalQuartz.WebFramework.AspNetCore.csproj" />
   </ItemGroup>
 </Project>

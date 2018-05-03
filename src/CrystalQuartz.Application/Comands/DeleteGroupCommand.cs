@@ -15,7 +15,7 @@
 
         protected override void PerformOperation(GroupInput input)
         {
-            var keys = Scheduler.GetJobKeys(GroupMatcher<JobKey>.GroupEquals(input.Group));
+            var keys = Scheduler.GetJobKeys(GroupMatcher<JobKey>.GroupEquals(input.Group)).Result;
             Scheduler.DeleteJobs(keys.ToList());
         }
     }

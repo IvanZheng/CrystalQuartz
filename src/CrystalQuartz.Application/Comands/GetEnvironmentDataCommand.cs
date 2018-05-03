@@ -37,15 +37,7 @@
 
             try
             {
-                var installedVersions = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\NET Framework Setup\NDP");
-                if (installedVersions != null)
-                {
-                    var versionNames = installedVersions.GetSubKeyNames();
-
-                    return versionNames.Last();
-                }
-
-                return defaultDotNetVersion;
+                return Assembly.GetAssembly(typeof(string)).GetName().Version.ToString();
             }
             catch (Exception)
             {

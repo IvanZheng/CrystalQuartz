@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Http;
+
 namespace CrystalQuartz.WebFramework.Response
 {
     using System.IO;
@@ -16,7 +18,7 @@ namespace CrystalQuartz.WebFramework.Response
             get { return 200; }
         }
 
-        protected HttpRequestBase Request { get; private set; }
+        protected HttpRequest Request { get; private set; }
 
         public Response FillResponse(IRequest request)
         {

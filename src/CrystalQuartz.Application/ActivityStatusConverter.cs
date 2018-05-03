@@ -1,32 +1,35 @@
-﻿namespace CrystalQuartz.Application
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
+namespace CrystalQuartz.Application
 {
     using System;
     using System.Collections.Generic;
-    using System.Web.Script.Serialization;
     using CrystalQuartz.Core.Domain;
 
-    public class ActivityStatusConverter : JavaScriptConverter
+    public class ActivityStatusConverter : JsonConverter
     {
-        public override object Deserialize(IDictionary<string, object> dictionary, Type type, JavaScriptSerializer serializer)
+
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            throw new InvalidOperationException();
+            var status = (ActivityStatus)value;
+            var o = JObject.FromObject(new
+            {
+                Value = (int)status,
+                Code = status.ToString().ToLower(),
+                Name = status.ToString()
+            });
+            o.WriteTo(writer);
         }
 
-        public override IDictionary<string, object> Serialize(object obj, JavaScriptSerializer serializer)
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            var status = (ActivityStatus) obj;
-            var resut = new Dictionary<string, object>();
-
-            resut["Value"] = (int) status;
-            resut["Code"] = status.ToString().ToLower();
-            resut["Name"] = status.ToString();
-
-            return resut;
+            throw new NotImplementedException();
         }
 
-        public override IEnumerable<Type> SupportedTypes
+        public override bool CanConvert(Type objectType)
         {
-            get { yield return typeof (ActivityStatus); }
+            return objectType == typeof(ActivityStatus);
         }
     }
 }
