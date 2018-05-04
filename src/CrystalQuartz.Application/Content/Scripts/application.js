@@ -1,11 +1,16 @@
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 /// <reference path="../Definitions/jquery.d.ts"/> 
 /// <reference path="../Definitions/john-smith-latest.d.ts"/> 
-var ApplicationModel = (function () {
+var ApplicationModel = /** @class */ (function () {
     function ApplicationModel() {
         this.onDataChanged = new js.Event();
         this.onAddTrigger = new js.Event();
@@ -18,12 +23,12 @@ var ApplicationModel = (function () {
     };
     return ApplicationModel;
 }());
-var DateData = (function () {
+var DateData = /** @class */ (function () {
     function DateData() {
     }
     return DateData;
 }());
-var NullableDate = (function () {
+var NullableDate = /** @class */ (function () {
     function NullableDate(date) {
         this.date = date;
         this._isEmpty = date == null;
@@ -36,13 +41,13 @@ var NullableDate = (function () {
     };
     return NullableDate;
 }());
-var AbstractCommand = (function () {
+var AbstractCommand = /** @class */ (function () {
     function AbstractCommand() {
         this.data = {};
     }
     return AbstractCommand;
 }());
-var GetEnvironmentDataCommand = (function (_super) {
+var GetEnvironmentDataCommand = /** @class */ (function (_super) {
     __extends(GetEnvironmentDataCommand, _super);
     function GetEnvironmentDataCommand() {
         var _this = _super.call(this) || this;
@@ -52,7 +57,7 @@ var GetEnvironmentDataCommand = (function (_super) {
     }
     return GetEnvironmentDataCommand;
 }(AbstractCommand));
-var GetDataCommand = (function (_super) {
+var GetDataCommand = /** @class */ (function (_super) {
     __extends(GetDataCommand, _super);
     function GetDataCommand() {
         var _this = _super.call(this) || this;
@@ -62,7 +67,7 @@ var GetDataCommand = (function (_super) {
     }
     return GetDataCommand;
 }(AbstractCommand));
-var StartSchedulerCommand = (function (_super) {
+var StartSchedulerCommand = /** @class */ (function (_super) {
     __extends(StartSchedulerCommand, _super);
     function StartSchedulerCommand() {
         var _this = _super.call(this) || this;
@@ -72,7 +77,7 @@ var StartSchedulerCommand = (function (_super) {
     }
     return StartSchedulerCommand;
 }(AbstractCommand));
-var StopSchedulerCommand = (function (_super) {
+var StopSchedulerCommand = /** @class */ (function (_super) {
     __extends(StopSchedulerCommand, _super);
     function StopSchedulerCommand() {
         var _this = _super.call(this) || this;
@@ -82,10 +87,20 @@ var StopSchedulerCommand = (function (_super) {
     }
     return StopSchedulerCommand;
 }(AbstractCommand));
+var StandBySchedulerCommand = /** @class */ (function (_super) {
+    __extends(StandBySchedulerCommand, _super);
+    function StandBySchedulerCommand() {
+        var _this = _super.call(this) || this;
+        _this.code = 'standby_scheduler';
+        _this.message = 'Standby the scheduler';
+        return _this;
+    }
+    return StandBySchedulerCommand;
+}(AbstractCommand));
 /*
  * Group Commands
  */
-var PauseGroupCommand = (function (_super) {
+var PauseGroupCommand = /** @class */ (function (_super) {
     __extends(PauseGroupCommand, _super);
     function PauseGroupCommand(group) {
         var _this = _super.call(this) || this;
@@ -98,7 +113,7 @@ var PauseGroupCommand = (function (_super) {
     }
     return PauseGroupCommand;
 }(AbstractCommand));
-var ResumeGroupCommand = (function (_super) {
+var ResumeGroupCommand = /** @class */ (function (_super) {
     __extends(ResumeGroupCommand, _super);
     function ResumeGroupCommand(group) {
         var _this = _super.call(this) || this;
@@ -111,7 +126,7 @@ var ResumeGroupCommand = (function (_super) {
     }
     return ResumeGroupCommand;
 }(AbstractCommand));
-var DeleteGroupCommand = (function (_super) {
+var DeleteGroupCommand = /** @class */ (function (_super) {
     __extends(DeleteGroupCommand, _super);
     function DeleteGroupCommand(group) {
         var _this = _super.call(this) || this;
@@ -127,7 +142,7 @@ var DeleteGroupCommand = (function (_super) {
 /*
  * Job Commands
  */
-var PauseJobCommand = (function (_super) {
+var PauseJobCommand = /** @class */ (function (_super) {
     __extends(PauseJobCommand, _super);
     function PauseJobCommand(group, job) {
         var _this = _super.call(this) || this;
@@ -141,7 +156,7 @@ var PauseJobCommand = (function (_super) {
     }
     return PauseJobCommand;
 }(AbstractCommand));
-var ResumeJobCommand = (function (_super) {
+var ResumeJobCommand = /** @class */ (function (_super) {
     __extends(ResumeJobCommand, _super);
     function ResumeJobCommand(group, job) {
         var _this = _super.call(this) || this;
@@ -155,7 +170,7 @@ var ResumeJobCommand = (function (_super) {
     }
     return ResumeJobCommand;
 }(AbstractCommand));
-var DeleteJobCommand = (function (_super) {
+var DeleteJobCommand = /** @class */ (function (_super) {
     __extends(DeleteJobCommand, _super);
     function DeleteJobCommand(group, job) {
         var _this = _super.call(this) || this;
@@ -169,7 +184,7 @@ var DeleteJobCommand = (function (_super) {
     }
     return DeleteJobCommand;
 }(AbstractCommand));
-var ExecuteNowCommand = (function (_super) {
+var ExecuteNowCommand = /** @class */ (function (_super) {
     __extends(ExecuteNowCommand, _super);
     function ExecuteNowCommand(group, job) {
         var _this = _super.call(this) || this;
@@ -186,7 +201,7 @@ var ExecuteNowCommand = (function (_super) {
 /*
  * Trigger Commands
  */
-var PauseTriggerCommand = (function (_super) {
+var PauseTriggerCommand = /** @class */ (function (_super) {
     __extends(PauseTriggerCommand, _super);
     function PauseTriggerCommand(group, trigger) {
         var _this = _super.call(this) || this;
@@ -200,7 +215,7 @@ var PauseTriggerCommand = (function (_super) {
     }
     return PauseTriggerCommand;
 }(AbstractCommand));
-var ResumeTriggerCommand = (function (_super) {
+var ResumeTriggerCommand = /** @class */ (function (_super) {
     __extends(ResumeTriggerCommand, _super);
     function ResumeTriggerCommand(group, trigger) {
         var _this = _super.call(this) || this;
@@ -214,7 +229,7 @@ var ResumeTriggerCommand = (function (_super) {
     }
     return ResumeTriggerCommand;
 }(AbstractCommand));
-var DeleteTriggerCommand = (function (_super) {
+var DeleteTriggerCommand = /** @class */ (function (_super) {
     __extends(DeleteTriggerCommand, _super);
     function DeleteTriggerCommand(group, trigger) {
         var _this = _super.call(this) || this;
@@ -228,7 +243,7 @@ var DeleteTriggerCommand = (function (_super) {
     }
     return DeleteTriggerCommand;
 }(AbstractCommand));
-var GetJobDetailsCommand = (function (_super) {
+var GetJobDetailsCommand = /** @class */ (function (_super) {
     __extends(GetJobDetailsCommand, _super);
     function GetJobDetailsCommand(group, job) {
         var _this = _super.call(this) || this;
@@ -242,7 +257,7 @@ var GetJobDetailsCommand = (function (_super) {
     }
     return GetJobDetailsCommand;
 }(AbstractCommand));
-var AddTriggerCommand = (function (_super) {
+var AddTriggerCommand = /** @class */ (function (_super) {
     __extends(AddTriggerCommand, _super);
     function AddTriggerCommand(form) {
         var _this = _super.call(this) || this;
@@ -257,7 +272,7 @@ var AddTriggerCommand = (function (_super) {
 /// <reference path="../Definitions/john-smith-latest.d.ts"/> 
 /// <reference path="../Definitions/lodash.d.ts"/> 
 /// <reference path="Models.ts"/> 
-var SchedulerService = (function () {
+var SchedulerService = /** @class */ (function () {
     function SchedulerService() {
         this.onCommandStart = new js.Event();
         this.onCommandComplete = new js.Event();
@@ -304,7 +319,7 @@ var SchedulerService = (function () {
 /// <reference path="../Definitions/lodash.d.ts"/>
 /// <reference path="Models.ts"/>
 /// <reference path="Services.ts"/>
-var ApplicationViewModel = (function () {
+var ApplicationViewModel = /** @class */ (function () {
     function ApplicationViewModel(applicationModel, commandService) {
         var _this = this;
         this.applicationModel = applicationModel;
@@ -381,12 +396,12 @@ var ApplicationViewModel = (function () {
         var allJobs = _.flatten(_.map(data.JobGroups, function (group) { return group.Jobs; })), allTriggers = _.flatten(_.map(allJobs, function (job) { return job.Triggers; })), activeTriggers = _.filter(allTriggers, function (trigger) { return trigger.Status.Code == 'active'; }), nextFireDates = _.compact(_.map(activeTriggers, function (trigger) { return trigger.NextFireDate == null ? null : trigger.NextFireDate.Ticks; }));
         return nextFireDates.length > 0 ? new Date(_.first(nextFireDates)) : null;
     };
+    ApplicationViewModel.DEFAULT_UPDATE_INTERVAL = 30000; // 30sec
+    ApplicationViewModel.MAX_UPDATE_INTERVAL = 300000; // 5min
+    ApplicationViewModel.MIN_UPDATE_INTERVAL = 10000; // 10sec
     return ApplicationViewModel;
 }());
-ApplicationViewModel.DEFAULT_UPDATE_INTERVAL = 30000; // 30sec
-ApplicationViewModel.MAX_UPDATE_INTERVAL = 300000; // 5min
-ApplicationViewModel.MIN_UPDATE_INTERVAL = 10000; // 10sec
-var ErrorViewModel = (function () {
+var ErrorViewModel = /** @class */ (function () {
     function ErrorViewModel(commandService) {
         this.commandService = commandService;
         this.message = js.observableValue();
@@ -412,7 +427,7 @@ var ErrorViewModel = (function () {
     };
     return ErrorViewModel;
 }());
-var ActivitiesSynschronizer = (function () {
+var ActivitiesSynschronizer = /** @class */ (function () {
     function ActivitiesSynschronizer(identityChecker, mapper, list) {
         this.identityChecker = identityChecker;
         this.mapper = mapper;
@@ -441,7 +456,7 @@ var ActivitiesSynschronizer = (function () {
     };
     return ActivitiesSynschronizer;
 }());
-var SchedulerViewModel = (function () {
+var SchedulerViewModel = /** @class */ (function () {
     function SchedulerViewModel(commandService, applicationModel) {
         this.commandService = commandService;
         this.applicationModel = applicationModel;
@@ -480,6 +495,12 @@ var SchedulerViewModel = (function () {
             .executeCommand(new StopSchedulerCommand())
             .done(function (data) { return _this.applicationModel.setData(data); });
     };
+    SchedulerViewModel.prototype.standbyScheduler = function () {
+        var _this = this;
+        this.commandService
+            .executeCommand(new StandBySchedulerCommand())
+            .done(function (data) { return _this.applicationModel.setData(data); });
+    };
     SchedulerViewModel.prototype.refreshData = function () {
         var _this = this;
         this.commandService
@@ -488,7 +509,7 @@ var SchedulerViewModel = (function () {
     };
     return SchedulerViewModel;
 }());
-var ManagableActivityViewModel = (function () {
+var ManagableActivityViewModel = /** @class */ (function () {
     function ManagableActivityViewModel(activity, commandService, applicationModel) {
         this.commandService = commandService;
         this.applicationModel = applicationModel;
@@ -538,7 +559,7 @@ var ManagableActivityViewModel = (function () {
     };
     return ManagableActivityViewModel;
 }());
-var JobGroupViewModel = (function (_super) {
+var JobGroupViewModel = /** @class */ (function (_super) {
     __extends(JobGroupViewModel, _super);
     function JobGroupViewModel(group, commandService, applicationModel) {
         var _this = _super.call(this, group, commandService, applicationModel) || this;
@@ -564,7 +585,7 @@ var JobGroupViewModel = (function (_super) {
     };
     return JobGroupViewModel;
 }(ManagableActivityViewModel));
-var JobViewModel = (function (_super) {
+var JobViewModel = /** @class */ (function (_super) {
     __extends(JobViewModel, _super);
     function JobViewModel(job, group, commandService, applicationModel) {
         var _this = _super.call(this, job, commandService, applicationModel) || this;
@@ -611,7 +632,7 @@ var JobViewModel = (function (_super) {
     };
     return JobViewModel;
 }(ManagableActivityViewModel));
-var TriggerViewModel = (function (_super) {
+var TriggerViewModel = /** @class */ (function (_super) {
     __extends(TriggerViewModel, _super);
     function TriggerViewModel(trigger, commandService, applicationModel) {
         var _this = _super.call(this, trigger, commandService, applicationModel) || this;
@@ -697,7 +718,7 @@ var TriggerViewModel = (function (_super) {
     };
     return TriggerViewModel;
 }(ManagableActivityViewModel));
-var CommandProgressViewModel = (function () {
+var CommandProgressViewModel = /** @class */ (function () {
     function CommandProgressViewModel(commandService) {
         var _this = this;
         this.commandService = commandService;
@@ -725,7 +746,7 @@ var CommandProgressViewModel = (function () {
     };
     return CommandProgressViewModel;
 }());
-var ValidatorViewModel = (function () {
+var ValidatorViewModel = /** @class */ (function () {
     function ValidatorViewModel(forced, key, source, validators, condition) {
         var _this = this;
         this.key = key;
@@ -767,7 +788,7 @@ var ValidatorViewModel = (function () {
     };
     return ValidatorViewModel;
 }());
-var Validators = (function () {
+var Validators = /** @class */ (function () {
     function Validators() {
         this._forced = new js.ObservableValue();
         this.validators = [];
@@ -796,7 +817,7 @@ var Validators = (function () {
 function map(source, func) {
     return js.dependentValue(func, source);
 }
-var ValidatorsFactory = (function () {
+var ValidatorsFactory = /** @class */ (function () {
     function ValidatorsFactory() {
     }
     ValidatorsFactory.required = function (message) {
@@ -824,7 +845,7 @@ var ValidatorsFactory = (function () {
     };
     return ValidatorsFactory;
 }());
-var TriggerDialogViewModel = (function () {
+var TriggerDialogViewModel = /** @class */ (function () {
     function TriggerDialogViewModel(job, callback, commandService) {
         this.job = job;
         this.callback = callback;
@@ -914,7 +935,7 @@ var TriggerDialogViewModel = (function () {
 }());
 /// <reference path="../Definitions/john-smith-latest.d.ts"/> 
 /// <reference path="../Scripts/ViewModels.ts"/> 
-var SchedulerView = (function () {
+var SchedulerView = /** @class */ (function () {
     function SchedulerView() {
         this.template = "#SchedulerView";
     }
@@ -938,6 +959,7 @@ var SchedulerView = (function () {
         }, true);
         var $$start = dom('#startSchedulerButton');
         var $$stop = dom('#stopSchedulerButton');
+        var $$standby = dom('#standbySchedulerButton');
         var $$refresh = dom('#refreshData');
         viewModel.canStart.listen(function (value) {
             if (value) {
@@ -949,13 +971,20 @@ var SchedulerView = (function () {
         });
         viewModel.canShutdown.listen(function (value) {
             if (value) {
+                $$standby.$.removeClass('disabled');
                 $$stop.$.removeClass('disabled');
             }
             else {
+                $$standby.$.addClass('disabled');
                 $$stop.$.addClass('disabled');
             }
         });
         $$start.on('click').react(viewModel.startScheduler);
+        $$standby.on('click').react(function () {
+            if (confirm('Are you sure you want to standby scheduler?')) {
+                viewModel.standbyScheduler();
+            }
+        });
         $$stop.on('click').react(function () {
             if (confirm('Are you sure you want to shutdown scheduler?')) {
                 viewModel.stopScheduler();
@@ -978,7 +1007,7 @@ var SchedulerView = (function () {
 /// <reference path="../Definitions/john-smith-latest.d.ts"/> 
 /// <reference path="../Scripts/ViewModels.ts"/> 
 /// <reference path="SchedulerView.ts"/> 
-var NullableDateView = (function () {
+var NullableDateView = /** @class */ (function () {
     function NullableDateView() {
         this.template = '<span class="cq-date"></span>';
     }
@@ -995,7 +1024,7 @@ var NullableDateView = (function () {
 /// <reference path="../Definitions/john-smith-latest.d.ts"/> 
 /// <reference path="../Scripts/ViewModels.ts"/> 
 /// <reference path="SchedulerView.ts"/> 
-var ActivityStatusView2 = (function () {
+var ActivityStatusView2 = /** @class */ (function () {
     function ActivityStatusView2() {
         this.template = '<span class="cq-activity-status">' +
             '<span class="cq-activity-status-primary"></span>' +
@@ -1020,7 +1049,7 @@ var ActivityStatusView2 = (function () {
 /// <reference path="../Scripts/ViewModels.ts"/> 
 /// <reference path="_NullableDate.ts"/> 
 /// <reference path="_ActivityStatus.ts"/> 
-var ActivityView = (function () {
+var ActivityView = /** @class */ (function () {
     function ActivityView() {
         this.template = ''; // abstract
     }
@@ -1065,7 +1094,7 @@ var ActivityView = (function () {
 /// <reference path="AbstractActivityView.ts"/> 
 /// <reference path="_NullableDate.ts"/> 
 /// <reference path="_ActivityStatus.ts"/> 
-var TriggerView = (function (_super) {
+var TriggerView = /** @class */ (function (_super) {
     __extends(TriggerView, _super);
     function TriggerView() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
@@ -1095,7 +1124,7 @@ var TriggerView = (function (_super) {
 /// <reference path="../Scripts/ViewModels.ts"/> 
 /// <reference path="../Scripts/Models.ts"/> 
 /// <reference path="SchedulerView.ts"/> 
-var PropertyValue = (function () {
+var PropertyValue = /** @class */ (function () {
     function PropertyValue() {
         this.template = '<span></span>';
     }
@@ -1112,7 +1141,7 @@ var PropertyValue = (function () {
     };
     return PropertyValue;
 }());
-var PropertyView = (function () {
+var PropertyView = /** @class */ (function () {
     function PropertyView() {
         this.template = '<tr>' +
             '<td class="name"></td>' +
@@ -1125,7 +1154,7 @@ var PropertyView = (function () {
     };
     return PropertyView;
 }());
-var PropertyWithTypeView = (function () {
+var PropertyWithTypeView = /** @class */ (function () {
     function PropertyWithTypeView() {
         this.template = '<tr>' +
             '<td class="name"></td>' +
@@ -1144,7 +1173,7 @@ var PropertyWithTypeView = (function () {
 /// <reference path="../Scripts/ViewModels.ts"/> 
 /// <reference path="TriggerView.ts"/> 
 /// <reference path="_Propertry.ts"/> 
-var ErrorView = (function () {
+var ErrorView = /** @class */ (function () {
     function ErrorView() {
         this.template = '#ErrorView';
     }
@@ -1175,7 +1204,7 @@ var ErrorView = (function () {
 /// <reference path="../Scripts/ViewModels.ts"/> 
 /// <reference path="TriggerView.ts"/> 
 /// <reference path="_Propertry.ts"/> 
-var JobDetailsView = (function () {
+var JobDetailsView = /** @class */ (function () {
     function JobDetailsView() {
         this.template = "#JobDetailsView";
     }
@@ -1190,7 +1219,7 @@ var JobDetailsView = (function () {
 /// <reference path="AbstractActivityView.ts"/> 
 /// <reference path="TriggerView.ts"/> 
 /// <reference path="JobDetailsView.ts"/> 
-var JobView = (function (_super) {
+var JobView = /** @class */ (function (_super) {
     __extends(JobView, _super);
     function JobView() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
@@ -1222,7 +1251,7 @@ var JobView = (function (_super) {
 /// <reference path="AbstractActivityView.ts"/> 
 /// <reference path="JobView.ts"/> 
 /// <reference path="_ActivityStatus.ts"/> 
-var JobGroupView = (function (_super) {
+var JobGroupView = /** @class */ (function (_super) {
     __extends(JobGroupView, _super);
     function JobGroupView() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
@@ -1242,7 +1271,7 @@ var JobGroupView = (function (_super) {
 /// <reference path="../Scripts/ViewModels.ts"/> 
 /// <reference path="SchedulerView.ts"/> 
 /// <reference path="../Views/JobGroupView.ts"/> 
-var CommandProgressView = (function () {
+var CommandProgressView = /** @class */ (function () {
     function CommandProgressView() {
         this.template = '<section class="cq-busy">' +
             '<div class="cq-busy-image">' +
@@ -1273,7 +1302,7 @@ var CommandProgressView = (function () {
 }());
 /// <reference path="../Definitions/john-smith-latest.d.ts"/> 
 /// <reference path="../Scripts/ViewModels.ts"/>
-var ValidationError = (function () {
+var ValidationError = /** @class */ (function () {
     function ValidationError() {
         this.template = '<li></li>';
     }
@@ -1282,7 +1311,7 @@ var ValidationError = (function () {
     };
     return ValidationError;
 }());
-var ValidatorView = (function () {
+var ValidatorView = /** @class */ (function () {
     function ValidatorView() {
         this.template = '<ul class="cq-validator"></ul>';
     }
@@ -1291,7 +1320,7 @@ var ValidatorView = (function () {
     };
     return ValidatorView;
 }());
-var TriggerDialogView = (function () {
+var TriggerDialogView = /** @class */ (function () {
     function TriggerDialogView() {
         this.template = '#TriggerDialogView';
     }
@@ -1376,7 +1405,7 @@ var TriggerDialogView = (function () {
 /// <reference path="../Views/JobGroupView.ts"/> 
 /// <reference path="../Views/CommandProgressView.ts"/> 
 /// <reference path="../Views/TriggerDialogView.ts"/> 
-var ApplicationView = (function () {
+var ApplicationView = /** @class */ (function () {
     function ApplicationView() {
         this.template = "#ApplicationView";
     }
@@ -1434,7 +1463,7 @@ var ApplicationView = (function () {
 /// <reference path="../Views/_NullableDate.ts"/>
 /// <reference path="../Views/ApplicationView.ts"/>
 /// <reference path="../Views/SchedulerView.ts"/>
-var Application = (function () {
+var Application = /** @class */ (function () {
     function Application() {
     }
     Application.prototype.run = function () {

@@ -1,6 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId></PackageId>
+    <Authors></Authors>
+    <Company></Company>
+    <Product>CrystalQuartz.AspNetCore</Product>
+    <Version>1.0.0-prerelease-00001</Version>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
 
@@ -18,7 +24,11 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="..\CrystalQuartz.Application\CrystalQuartz.Application.csproj" />
-    <ProjectReference Include="..\CrystalQuartz.WebFramework.Owin\CrystalQuartz.WebFramework.AspNetCore.csproj" />
+    <ProjectReference Include="..\CrystalQuartz.Application\CrystalQuartz.Application.csproj">
+      <Private>true</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\CrystalQuartz.WebFramework.Owin\CrystalQuartz.WebFramework.AspNetCore.csproj">
+      <Private>true</Private>
+    </ProjectReference>
   </ItemGroup>
 </Project>

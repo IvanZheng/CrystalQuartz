@@ -13,7 +13,7 @@
 
         protected override void PerformOperation(JobInput input)
         {
-            Scheduler.PauseJob(new JobKey(input.Job, input.Group));
+            Scheduler.PauseJob(new JobKey(input.Job, input.Group)).Wait();
         }
     }
 }

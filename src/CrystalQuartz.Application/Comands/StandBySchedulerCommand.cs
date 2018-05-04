@@ -4,15 +4,15 @@
     using CrystalQuartz.Core;
     using CrystalQuartz.Core.SchedulerProviders;
 
-    public class StopSchedulerCommand : AbstractOperationCommand<NoInput>
+    public class StandBySchedulerCommand : AbstractOperationCommand<NoInput>
     {
-        public StopSchedulerCommand(ISchedulerProvider schedulerProvider, ISchedulerDataProvider schedulerDataProvider) : base(schedulerProvider, schedulerDataProvider)
+        public StandBySchedulerCommand(ISchedulerProvider schedulerProvider, ISchedulerDataProvider schedulerDataProvider) : base(schedulerProvider, schedulerDataProvider)
         {
         }
 
         protected override void PerformOperation(NoInput input)
         {
-            Scheduler.Shutdown(false).Wait();
+            Scheduler.Standby().Wait();
         }
     }
 }

@@ -23,7 +23,7 @@ class SchedulerService {
         return this.executeCommand<SchedulerData>(new GetDataCommand());
     }
 
-    executeCommand<T>(command: ICommand<T>): JQueryPromise<T> {
+    executeCommand<T>(command: ICommand<T>): JQueryPromise<any> {
         var result = $.Deferred(),
             data = _.assign(command.data, { command: command.code }),
             that = this;

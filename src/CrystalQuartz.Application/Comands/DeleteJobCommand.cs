@@ -13,7 +13,7 @@ namespace CrystalQuartz.Application.Comands
 
         protected override void PerformOperation(JobInput input)
         {
-            Scheduler.DeleteJob(new JobKey(input.Job, input.Group));
+            Scheduler.DeleteJob(new JobKey(input.Job, input.Group)).Wait();
         }
     }
 }

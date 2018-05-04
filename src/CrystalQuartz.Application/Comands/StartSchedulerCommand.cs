@@ -12,7 +12,7 @@
 
         protected override void PerformOperation(NoInput input)
         {
-            Scheduler.Start();
+            Scheduler.Start().Wait();
         }
     }
 }

@@ -14,7 +14,7 @@
         protected override void PerformOperation(TriggerInput input)
         {
             var triggerKey = new TriggerKey(input.Trigger, input.Group);
-            Scheduler.ResumeTrigger(triggerKey);
+            Scheduler.ResumeTrigger(triggerKey).Wait();
         }
     }
 }

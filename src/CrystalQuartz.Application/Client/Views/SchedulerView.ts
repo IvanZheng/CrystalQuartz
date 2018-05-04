@@ -28,6 +28,7 @@ class SchedulerView implements js.IView<SchedulerViewModel> {
 
         var $$start = dom('#startSchedulerButton');
         var $$stop = dom('#stopSchedulerButton');
+        var $$standby = dom('#standbySchedulerButton');
         var $$refresh = dom('#refreshData');
 
         viewModel.canStart.listen((value) => {
@@ -38,15 +39,26 @@ class SchedulerView implements js.IView<SchedulerViewModel> {
             }
         });
 
+
+
         viewModel.canShutdown.listen((value) => {
             if (value) {
+                $$standby.$.removeClass('disabled');
                 $$stop.$.removeClass('disabled');
             } else {
+                $$standby.$.addClass('disabled');
                 $$stop.$.addClass('disabled');
             }
         });
 
         $$start.on('click').react(viewModel.startScheduler);
+
+        $$standby.on('click').react(() => {
+            if (confirm('Are you sure you want to standby scheduler?')) {
+                viewModel.standbyScheduler();
+            }
+        });
+
         $$stop.on('click').react(() => {
             if (confirm('Are you sure you want to shutdown scheduler?')) {
                 viewModel.stopScheduler();

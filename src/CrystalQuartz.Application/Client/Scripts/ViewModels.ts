@@ -10,6 +10,9 @@ class ApplicationViewModel implements js.IViewModel {
 
     private groupsSynchronizer: ActivitiesSynschronizer<JobGroup, JobGroupViewModel>;
 
+    initState?: () => void;
+    releaseState?: () => void;
+
     constructor(private applicationModel: ApplicationModel, private commandService: SchedulerService) {
         this.scheduler = new SchedulerViewModel(commandService, applicationModel);
         this.commandProgress = new CommandProgressViewModel(commandService);
@@ -195,7 +198,7 @@ class ActivitiesSynschronizer<TActivity extends ManagableActivity, TActivityView
     }
 }
 
-class SchedulerViewModel {
+class SchedulerViewModel implements js.IViewModel {
     name = js.observableValue<string>();
     instanceId = js.observableValue<string>();
     status = js.observableValue<string>();
@@ -206,6 +209,9 @@ class SchedulerViewModel {
     canShutdown = js.observableValue<boolean>();
     isRemote = js.observableValue<boolean>();
     schedulerType = js.observableValue<string>();
+
+    initState?: () => void;
+    releaseState?: () => void;
 
     constructor(private commandService: SchedulerService, private applicationModel: ApplicationModel) {
     }
@@ -232,6 +238,12 @@ class SchedulerViewModel {
     stopScheduler() {
         this.commandService
             .executeCommand(new StopSchedulerCommand())
+            .done(data => this.applicationModel.setData(data));
+    }
+
+    standbyScheduler() {
+        this.commandService
+            .executeCommand(new StandBySchedulerCommand())
             .done(data => this.applicationModel.setData(data));
     }
 

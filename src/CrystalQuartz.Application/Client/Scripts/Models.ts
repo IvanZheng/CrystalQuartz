@@ -175,6 +175,15 @@ class StopSchedulerCommand extends AbstractCommand<SchedulerData> {
     }
 }
 
+class StandBySchedulerCommand extends AbstractCommand<SchedulerData> {
+    constructor() {
+        super();
+
+        this.code = 'standby_scheduler';
+        this.message = 'Standby the scheduler';
+    }
+}
+
 /*
  * Group Commands
  */

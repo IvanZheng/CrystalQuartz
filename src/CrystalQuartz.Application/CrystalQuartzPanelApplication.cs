@@ -71,6 +71,7 @@ namespace CrystalQuartz.Application
                      */
                     .WhenCommand("start_scheduler")  .Do(new StartSchedulerCommand(_schedulerProvider, _schedulerDataProvider))
                     .WhenCommand("stop_scheduler")   .Do(new StopSchedulerCommand(_schedulerProvider, _schedulerDataProvider))
+                    .WhenCommand("standby_scheduler").Do(new StandBySchedulerCommand(_schedulerProvider, _schedulerDataProvider))
 
                     /* 
                      * Misc commands
